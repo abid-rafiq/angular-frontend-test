@@ -1,0 +1,114 @@
+<section>
+    <h2>Q1: nGChanges</h2>
+
+    <!-- <a (click)="appDataUpdate()">Click here to change update ngOnChange</a> -->
+    <button (click)="appDataUpdate()">Update ngOnChange</button>
+    <br/>
+    <app-q1-child [appData]=data></app-q1-child>
+
+</section>
+
+<section>
+    <h2>Q2: Lazy Load Modules</h2>
+
+    <div class="btn-list">
+        <button routerLink="/q2-lazydata-list">Lazy Load</button>
+        <button routerLink="/q2-lazydata2-list">Lazy Load 2</button>    
+    </div>
+
+    <router-outlet></router-outlet>
+
+</section>
+
+<section>
+    <h2>Q3: Route Guards</h2>
+
+    <button routerLink="/q3-route-guard">Route Guard</button>
+
+    <p>Route Guard prevents routing unless there is sufficient authentication. In this example I have kept it true, so the url in url bar changes if pressed button. If it is updated to false it will never change the url.</p>
+
+</section>
+
+<section>
+    <h2>Q4: Data Pass</h2>  
+
+    <div class="input-field">
+        <form>
+            <input [(ngModel)]="userName" placeholder="Enter your name here." name="firstName" />
+            <button (click)="sendDatatoRoute()">Route Guard</button>
+        </form>
+    </div>
+    
+    <app-q4-page-component [data]=formData></app-q4-page-component>
+
+</section>
+
+<section>
+    <h2>Q5: Animation</h2>
+
+    <button (click)="startAngularAnimation()">Toggle Angular Animation</button>
+
+    <div class="wrapper-anim">
+        <div [@childAnimation]="isAnimated ? 'left' : 'center'" class="circle left"></div>
+        <div [@childAnimation]="isAnimated ? 'right' : 'center-right'" class="circle right"></div>
+    </div>
+
+    <button (click)="startCssAnimation()">Toggle CSS Animation</button>
+
+    <div class="wrapper-anim">
+        <div class="circle left" [ngClass]="isAnimatedCSS ? 'animate-it' : ''"></div>
+        <div class="circle right" [ngClass]="isAnimatedCSS ? 'animate-it' : ''"></div>
+    </div>
+
+</section>
+
+<section>
+    <h2>Q7: Validation</h2>
+
+    <form action="" class="form-flex" novalidate>
+        <div class="form-group" [ngClass]="(fullname.value.length < 10 && fullname.value != '') ? '' : 'has--eror'">
+            <input type="text" (keyup)='0' #fullname>  
+            <div class="error">
+                <span *ngIf="fullname.value.length > 10">Data should be less than 10</span>
+                <span *ngIf="!fullname.value">This field is required</span>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="(isEmail(emailField.value)) ? '' : 'has--eror'">
+            <input type="text" (keyup)='0' #emailField>  
+            <div class="error">
+                <span *ngIf="emailField.value && !isEmail(emailField.value)">Email should must be valid</span>
+                <span *ngIf="!emailField.value">This field is required</span>
+            </div>
+        </div>
+
+        <button [disabled]="fullname.value.length > 10 || !fullname.value || !isEmail(emailField.value)">OK</button>
+    </form>
+
+</section>
+
+<section>
+    <h2>Q8: ngContent DEMO</h2>  
+    
+    <app-q8-ngcontent>This is ng-content coming all the way.</app-q8-ngcontent>
+
+</section>
+
+<section>
+    <h2>Q9: Number Format</h2>  
+    
+    <div class="form-flex">
+
+        <div class="form-group">
+            <label for="">Custom Formatting (Works on Blur)</label>
+            <input type="text" (change)='formatMoney(moneyValue.value)' value="{{ formattedMoney || '$0.00' }}" #moneyValue>  
+        </div>
+    
+        <div class="form-group">
+            <label for="">Formatting with Plugin</label>
+            <input id="mask-it" data-inputmask="'mask': '$ 99,999.99'" />
+        </div>
+    </div>
+    
+
+</section>
